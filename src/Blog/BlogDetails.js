@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import "./blog-details.css";
 
 const BlogDetails = (props) => {
-  const { match } = props;
+  const { match, history } = props;
 
   const [loading, toggleLoading] = useState(true);
 
@@ -12,6 +13,7 @@ const BlogDetails = (props) => {
   const [blogComments, setBlogComments] = useState(null);
 
   useEffect(() => {
+    toggleLoading(true);
     const blogDetailsPromise = axios.get(
       `https://jsonplaceholder.typicode.com/posts/${match.params.blogId}`
     );
@@ -25,7 +27,9 @@ const BlogDetails = (props) => {
       setBlogComments(response[1].data);
       toggleLoading(false);
     });
-  }, []);
+  }, [match.params.blogId]);
+
+  const blogId = parseInt(match.params.blogId, 10);
 
   return (
     <div className="container">
@@ -33,6 +37,9 @@ const BlogDetails = (props) => {
         "Loading...."
       ) : (
         <>
+          <div>
+            <Link to="/">Back</Link>
+          </div>
           <div>
             <div className="blog-title">{blogDetails.title}</div>
             <div className="blog-content"> {blogDetails.body}</div>
@@ -48,6 +55,27 @@ const BlogDetails = (props) => {
               );
             })}
           </ul>
+
+          <div className="btn-container">
+            <button
+              className={blogId === 1 ? "disabled" : ""}
+              onClick={() => {
+                let blogId = parseInt(match.params.blogId, 10);
+                history.push(`/blogs/${--blogId}`);
+              }}
+            >
+              Previous
+            </button>
+            <button
+              className={blogId === 100 ? "disabled" : ""}
+              onClick={() => {
+                let blogId = parseInt(match.params.blogId, 10);
+                history.push(`/blogs/${++blogId}`);
+              }}
+            >
+              Next
+            </button>
+          </div>
         </>
       )}
     </div>
