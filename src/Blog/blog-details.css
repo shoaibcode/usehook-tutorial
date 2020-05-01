@@ -1,0 +1,29 @@
+.container {
+  width: 70%;
+  margin: 0 auto;
+}
+
+.blog-title {
+  font-family: "Bebas Neue", cursive;
+  font-size: 31px;
+  margin-top: 30px;
+}
+
+.blog-content {
+  font-family: "Montserrat", sans-serif;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.comment-list {
+  list-style: none;
+  font-size: 13px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.comment-list-item {
+  margin-top: 10px;
+  text-align: left;
+  border: 1px solid #f1f1f1;
+  padding: 9px;
+}

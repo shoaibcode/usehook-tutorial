@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import "./blog-details.css";
+
 const BlogDetails = (props) => {
   const { match } = props;
 
@@ -26,20 +28,20 @@ const BlogDetails = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {loading ? (
         "Loading...."
       ) : (
         <>
           <div>
-            <div>Title:{blogDetails.title}</div>
-            <div>Blog: {blogDetails.body}</div>
+            <div className="blog-title">{blogDetails.title}</div>
+            <div className="blog-content"> {blogDetails.body}</div>
           </div>
 
-          <ul>
+          <ul className="comment-list">
             {blogComments.map((blogComment) => {
               return (
-                <li key={blogComment.id}>
+                <li className="comment-list-item" key={blogComment.id}>
                   <div>{blogComment.body}</div>
                   <div>{blogComment.email}</div>
                 </li>
