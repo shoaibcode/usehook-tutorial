@@ -1,23 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+import useHover from "./hooks/useHover";
 
 function App() {
+  const { hovering, onMouseLeave, onMouseOver } = useHover();
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img
+          src={logo}
+          onMouseLeave={onMouseLeave}
+          onMouseOver={onMouseOver}
+          className="App-logo"
+          alt="logo"
+        />
+        {hovering ? "Hovering" : "Not hovering"}
       </header>
     </div>
   );
