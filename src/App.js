@@ -1,21 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
-import useCounter from "./Hooks/useCounter";
+import useList from "./Hooks/useList";
 
 function App() {
-  const { count, increment, decrement } = useCounter();
+  const { list, push, pull } = useList();
+  const [todo, setTodo] = useState("");
 
-  console.log(count);
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+
+    push(todo);
+    setTodo("");
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <div>{count}</div>
-        <div>
-          <button onClick={increment}>Add</button>
-          <button onClick={decrement}>Dec</button>
-        </div>
+        <form onSubmit={onSubmitHandler}>
+          <div>
+            <label for="todo">Add Todo </label>
+            <input
+              type="text"
+              id="todo"
+              value={todo}
+              onChange={(event) => {
+                setTodo(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+
+        <ul>
+          {list.map((listItem, index) => {
+            return (
+              <li key={index}>
+                <div>{listItem}</div>
+                <button
+                  onClick={() => {
+                    pull(index);
+                  }}
+                >
+                  Remove
+                </button>
+              </li>
+            );
+          })}
+        </ul>
       </header>
     </div>
   );
