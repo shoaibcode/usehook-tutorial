@@ -1,22 +1,14 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
+import Modal from "./components/modal";
 import "./App.css";
 
-import useHover from "./hooks/useHover";
-
 function App() {
-  const { hovering, onMouseLeave, onMouseOver } = useHover();
+  const [showModal, setShowModal] = useState(false);
   return (
     <div className="App">
       <header className="App-header">
-        <img
-          src={logo}
-          onMouseLeave={onMouseLeave}
-          onMouseOver={onMouseOver}
-          className="App-logo"
-          alt="logo"
-        />
-        {hovering ? "Hovering" : "Not hovering"}
+        <button onClick={() => setShowModal(true)}>Show Modal </button>
+        {showModal ? <Modal /> : null}
       </header>
     </div>
   );
