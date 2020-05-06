@@ -8,7 +8,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         <button onClick={() => setShowModal(true)}>Show Modal </button>
-        {showModal ? <Modal /> : null}
+        {showModal ? (
+          <Modal
+            onClose={() => {
+              setShowModal(false);
+            }}
+          />
+        ) : null}
       </header>
     </div>
   );
