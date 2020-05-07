@@ -1,5 +1,7 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
+
+import useMyReducer from "./hooks/useMyReducer";
 
 const ACTION_TYPES = {
   ADD_TODO: "ADD_TODO",
@@ -34,7 +36,7 @@ const todolistReducer = (state, action) => {
 };
 
 function App() {
-  const [todos, dispatch] = useReducer(todolistReducer, []);
+  const [todos, dispatch] = useMyReducer(todolistReducer, []);
 
   const [text, setText] = useState("");
 
